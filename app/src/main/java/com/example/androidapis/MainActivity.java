@@ -86,6 +86,35 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<DataModal> call, Throwable t) {
 
                 tvResponse.setText(String.format("%s%s", getString(R.string.error_found_is), t.getMessage()));
+=======
+                // this method is called when we get response from our api.
+                Toast.makeText(MainActivity.this, "Data added to API", Toast.LENGTH_SHORT).show();
+
+                // below line is for hiding our progress bar.
+                loadingPB.setVisibility(View.GONE);
+
+                // on below line we are setting empty text
+                // to our both edit text.
+                edtJob.setText("");
+                edtName.setText("");
+
+                // we are getting response from our body
+                // and passing it to our modal class.
+                DataModal responseFromAPI = response.body();
+
+                // on below line we are getting our data from modal class and adding it to our string.
+                String responseString = "Response Code : " + response.code() + "\nName : " + responseFromAPI.getName() + "\n" + "Job : " + responseFromAPI.getJob();
+
+                // below line we are setting our
+                // string to our text view.
+                tvResponse.setText(responseString);
+            }
+            @Override
+            public void onFailure(Call<DataModal> call, Throwable t) {
+                // setting text to our text view when
+                // we get error response from API.
+                tvResponse.setText("Error found is : " + t.getMessage());
+
             }
         });
     }
