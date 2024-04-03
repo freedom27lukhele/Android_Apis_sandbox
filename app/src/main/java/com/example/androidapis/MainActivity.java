@@ -66,6 +66,27 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<DataModal>() {
             @Override
             public void onResponse(Call<DataModal> call, Response<DataModal> response) {
+
+                Toast.makeText(MainActivity.this, "Data added to API", Toast.LENGTH_SHORT).show();
+
+                loadingPB.setVisibility(View.GONE);
+
+                edtJob.setText("");
+                edtName.setText("");
+
+                DataModal responseFromAPI = response.body();
+
+
+                String responseString = "Response Code : " + response.code() + "\nName : " + responseFromAPI.getName() + "\n" + "Job : " + responseFromAPI.getJob();
+
+                tvResponse.setText(responseString);
+            }
+
+            @Override
+            public void onFailure(Call<DataModal> call, Throwable t) {
+
+                tvResponse.setText(String.format("%s%s", getString(R.string.error_found_is), t.getMessage()));
+=======
                 // this method is called when we get response from our api.
                 Toast.makeText(MainActivity.this, "Data added to API", Toast.LENGTH_SHORT).show();
 
@@ -93,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 // setting text to our text view when
                 // we get error response from API.
                 tvResponse.setText("Error found is : " + t.getMessage());
+
             }
         });
     }

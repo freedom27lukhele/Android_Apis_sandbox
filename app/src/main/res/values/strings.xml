@@ -3,4 +3,6 @@
     <string name="enter_your_job">Enter your job</string>
     <string name="enter_your_name">Enter your name</string>
     <string name="send_data_to_api">Send Data to Api</string>
+    <string name="error_found_is">"Error found is : "</string>
+
 </resources>
